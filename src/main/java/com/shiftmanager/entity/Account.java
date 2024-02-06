@@ -5,6 +5,7 @@ import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 @Entity(name = "account")
@@ -15,12 +16,23 @@ import java.util.UUID;
 @NoArgsConstructor
 public class Account extends BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @GenericGenerator(name = "native")
-    @Column(name = "id")
+    @GeneratedValue(generator = "UUID")
+    @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
-    @Column(name = "role_id")
-    private String roleId;
+
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
+
+    @OneToMany(mappedBy = "account",
+            targetEntity = Shift.class)
+    private List<Shift> shifts;
+
+    @OneToMany(mappedBy = "account",
+            targetEntity = Availability.class)
+    private List<Availability> availabilities;
+
+
     @Column(name = "address")
     private String Address;
     @Column(name = "first_name")

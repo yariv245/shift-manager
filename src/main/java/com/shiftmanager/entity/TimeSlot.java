@@ -5,9 +5,12 @@ import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity(name = "time_slot")
-@Getter @Setter @ToString
+@Getter
+@Setter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 public class TimeSlot extends BaseEntity {
@@ -16,8 +19,12 @@ public class TimeSlot extends BaseEntity {
     @GenericGenerator(name = "native")
     @Column(name = "id")
     private Long id;
-    @Column(name = "start")
-    private LocalDateTime start;
-    @Column(name = "end")
-    private LocalDateTime end;
+    @Column(name = "start_slot")
+    private LocalDateTime startSlot;
+    @Column(name = "end_slot")
+    private LocalDateTime endSlot;
+
+    @OneToMany(mappedBy = "timeSlot",
+            targetEntity = Availability.class)
+    private List<Availability> availabilities;
 }

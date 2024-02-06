@@ -19,12 +19,16 @@ public class Shift extends BaseEntity {
     @GenericGenerator(name = "native")
     @Column(name = "id")
     private Long id;
-    @Column(name = "account_id", nullable = false)
-    private UUID accountId;
-    @Column(name = "start")
-    private LocalDateTime start;
-    @Column(name = "end")
-    private LocalDateTime end;
-    @Column(name = "work_schedule_id")
-    private Long workScheduleId;
+    @Column(name = "start_shift")
+    private LocalDateTime startShift;
+    @Column(name = "end_shift")
+    private LocalDateTime endShift;
+
+    @ManyToOne
+    @JoinColumn(name="work_schedule_id")
+    private WorkSchedule workSchedule;
+
+    @ManyToOne
+    @JoinColumn(name="account_id")
+    private Account account;
 }

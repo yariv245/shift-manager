@@ -5,8 +5,6 @@ import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Entity(name = "availability")
 @Getter
@@ -20,10 +18,13 @@ public class Availability extends BaseEntity {
     @GenericGenerator(name = "native")
     @Column(name = "id")
     private Long id;
-    @Column(name = "account_id", nullable = false)
-    private UUID accountId;
-    @Column(name = "day")
-    private LocalDate day;
-    @Column(name = "time_slot")
-    private LocalDateTime timeSlot;
+    @Column(name = "available_day")
+    private LocalDate availableDay;
+    @ManyToOne
+    @JoinColumn(name="account_id")
+    private Account account;
+
+    @ManyToOne
+    @JoinColumn(name="time_slot_id")
+    private TimeSlot timeSlot;
 }

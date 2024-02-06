@@ -5,6 +5,7 @@ import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity(name = "work_schedule")
 @Getter
@@ -18,10 +19,13 @@ public class WorkSchedule extends BaseEntity {
     @GenericGenerator(name = "native")
     @Column(name = "id")
     private Long id;
-    @Column(name = "start")
-    private LocalDateTime start;
-    @Column(name = "end")
-    private LocalDateTime end;
+    @Column(name = "start_schedule")
+    private LocalDateTime startSchedule;
+    @Column(name = "end_schedule")
+    private LocalDateTime endSchedule;
     @Column(name = "amount_of_workers")
     private Long amountOfWorkers;
+    @OneToMany(mappedBy = "workSchedule",
+            targetEntity = Shift.class)
+    private List<Shift> shifts;
 }
