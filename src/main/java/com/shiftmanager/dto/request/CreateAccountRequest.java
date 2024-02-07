@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AccountRequest {
+public class CreateAccountRequest {
     private String address;
     @NotBlank
     private String firstName;
