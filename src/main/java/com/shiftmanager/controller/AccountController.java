@@ -7,6 +7,8 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -26,13 +28,13 @@ public class AccountController {
         AccountResponse response = accountService.create(request);
 
         return ResponseEntity
-                .created(URI.create(response.getFirstName() + " " + response.getLastName()))
+                .status(HttpStatus.CREATED)
                 .body(response);
     }
 
     @GetMapping
     public ResponseEntity<AccountResponse> getByPhoneNumber(@RequestParam
-                                                            @Pattern(regexp = "(^$|[0-9]{10})", message = "Mobile number must be 10 digits")
+                                                            @Pattern(regexp = "(^$|[0-9]{9})", message = "Mobile number must be 9 digits")
                                                                     String mobileNumber,
                                                             @NotBlank String mobileNumberPrefix) {
         AccountResponse response = accountService.getByPhoneNumber(mobileNumber, mobileNumberPrefix);

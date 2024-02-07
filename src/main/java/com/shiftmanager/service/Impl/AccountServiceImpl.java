@@ -24,7 +24,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public AccountResponse create(AccountRequest request) {
-        Optional<Account> accountByPhoneNumber = accountRepository.findByPhoneNumberPrefixAndPhoneNumber(
+        Optional<Account> accountByPhoneNumber = accountRepository.findByPhonePrefixAndPhoneNumber(
                 request.getPhonePrefix(), request.getPhoneNumber());
 
         if (accountByPhoneNumber.isPresent())
@@ -38,7 +38,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public AccountResponse getByPhoneNumber(String phoneNumber, String phoneNumberPrefix) {
-        Account account = accountRepository.findByPhoneNumberPrefixAndPhoneNumber(phoneNumberPrefix, phoneNumber)
+        Account account = accountRepository.findByPhonePrefixAndPhoneNumber(phoneNumberPrefix, phoneNumber)
                 .orElseThrow(() -> new ResourceNotFoundException("Account", "phone number", phoneNumberPrefix + phoneNumber));
 
         return modelMapper.map(account, AccountResponse.class);

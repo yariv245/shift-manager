@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AccountRequest {
-    private String Address;
+    private String address;
     @NotBlank
     private String firstName;
     @NotBlank
