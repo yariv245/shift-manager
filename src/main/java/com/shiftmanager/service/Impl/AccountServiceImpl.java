@@ -4,9 +4,11 @@ import com.shiftmanager.dto.request.CreateAccountRequest;
 import com.shiftmanager.dto.request.UpdateAccountRequest;
 import com.shiftmanager.dto.response.AccountResponse;
 import com.shiftmanager.entity.Account;
+import com.shiftmanager.entity.Role;
 import com.shiftmanager.exception.AccountExistsException;
 import com.shiftmanager.exception.ResourceNotFoundException;
 import com.shiftmanager.repository.AccountRepository;
+import com.shiftmanager.repository.RoleRepository;
 import com.shiftmanager.service.AccountService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +23,7 @@ import java.util.Optional;
 public class AccountServiceImpl implements AccountService {
 
     private final AccountRepository accountRepository;
+    private final RoleRepository roleRepository;
     private final ModelMapper modelMapper;
 
     @Override
@@ -32,9 +35,16 @@ public class AccountServiceImpl implements AccountService {
             throw new AccountExistsException(
                     String.format("Account Exists with phone number: &s" + request.getPhonePrefix(), request.getPhoneNumber()));
         Account account = modelMapper.map(request, Account.class);
+        setRole(request, account);
         Account saved = accountRepository.save(account);
 
         return modelMapper.map(saved, AccountResponse.class);
+    }
+
+    private void setRole(CreateAccountRequest request, Account account) {
+        Role role = roleRepository.findById(request.getRole_id())
+                .orElseThrow(() -> new ResourceNotFoundException("Role", "id", request.getRole_id().toString()));
+        account.setRole(role);
     }
 
     @Override

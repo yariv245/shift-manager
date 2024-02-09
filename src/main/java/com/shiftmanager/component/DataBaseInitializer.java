@@ -21,7 +21,7 @@ public class DataBaseInitializer implements CommandLineRunner {
                 .name("Employee")
                 .build();
         Role manager = Role.builder()
-                .id(1L)
+                .id(2L)
                 .name("Manager")
                 .build();
 
