@@ -8,6 +8,7 @@ import java.util.List;
 
 @Entity(name = "role")
 @Getter
+@Builder
 @Setter
 @ToString
 @AllArgsConstructor
