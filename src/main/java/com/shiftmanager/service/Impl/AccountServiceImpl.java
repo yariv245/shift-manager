@@ -1,7 +1,7 @@
 package com.shiftmanager.service.Impl;
 
-import com.shiftmanager.dto.request.CreateAccountRequest;
-import com.shiftmanager.dto.request.UpdateAccountRequest;
+import com.shiftmanager.dto.request.CreateAccount;
+import com.shiftmanager.dto.request.UpdateAccount;
 import com.shiftmanager.dto.response.AccountResponse;
 import com.shiftmanager.entity.Account;
 import com.shiftmanager.entity.Role;
@@ -27,7 +27,7 @@ public class AccountServiceImpl implements AccountService {
     private final ModelMapper modelMapper;
 
     @Override
-    public AccountResponse create(CreateAccountRequest request) {
+    public AccountResponse create(CreateAccount request) {
         Optional<Account> accountByPhoneNumber = accountRepository.findByPhonePrefixAndPhoneNumber(
                 request.getPhonePrefix(), request.getPhoneNumber());
 
@@ -41,7 +41,7 @@ public class AccountServiceImpl implements AccountService {
         return modelMapper.map(saved, AccountResponse.class);
     }
 
-    private void setRole(CreateAccountRequest request, Account account) {
+    private void setRole(CreateAccount request, Account account) {
         Role role = roleRepository.findById(request.getRole_id())
                 .orElseThrow(() -> new ResourceNotFoundException("Role", "id", request.getRole_id().toString()));
         account.setRole(role);
@@ -60,7 +60,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public AccountResponse update(UpdateAccountRequest request) {
+    public AccountResponse update(UpdateAccount request) {
         Account account = getAccountByPhoneNumber(request.getPhoneNumber(), request.getPhonePrefix());
         modelMapper.map(request, account);
         Account saved = accountRepository.save(account);

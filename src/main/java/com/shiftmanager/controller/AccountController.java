@@ -1,7 +1,7 @@
 package com.shiftmanager.controller;
 
-import com.shiftmanager.dto.request.CreateAccountRequest;
-import com.shiftmanager.dto.request.UpdateAccountRequest;
+import com.shiftmanager.dto.request.CreateAccount;
+import com.shiftmanager.dto.request.UpdateAccount;
 import com.shiftmanager.dto.response.AccountResponse;
 import com.shiftmanager.service.AccountService;
 import jakarta.validation.Valid;
@@ -22,7 +22,7 @@ public class AccountController {
     private final AccountService accountService;
 
     @PostMapping("/create")
-    public ResponseEntity<AccountResponse> createAccount(@Valid @RequestBody CreateAccountRequest request) {
+    public ResponseEntity<AccountResponse> createAccount(@Valid @RequestBody CreateAccount request) {
         AccountResponse response = accountService.create(request);
 
         return ResponseEntity
@@ -42,7 +42,7 @@ public class AccountController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<AccountResponse> update(@Valid @RequestBody UpdateAccountRequest request) {
+    public ResponseEntity<AccountResponse> update(@Valid @RequestBody UpdateAccount request) {
         AccountResponse response = accountService.update(request);
 
         return ResponseEntity

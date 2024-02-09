@@ -8,6 +8,7 @@ import java.time.LocalDate;
 
 @Entity(name = "availability")
 @Getter
+@Builder
 @Setter
 @ToString
 @AllArgsConstructor
@@ -21,10 +22,10 @@ public class Availability extends BaseEntity {
     @Column(name = "available_day")
     private LocalDate availableDay;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="account_id")
+    @JoinColumn(name = "account_id")
     private Account account;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="time_slot_id")
+    @JoinColumn(name = "time_slot_id")
     private TimeSlot timeSlot;
 }
