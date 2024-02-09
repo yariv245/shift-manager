@@ -8,7 +8,6 @@ import com.shiftmanager.exception.AccountExistsException;
 import com.shiftmanager.exception.ResourceNotFoundException;
 import com.shiftmanager.repository.AccountRepository;
 import com.shiftmanager.service.AccountService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -53,7 +52,6 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public AccountResponse update(UpdateAccountRequest request) {
         Account account = getAccountByPhoneNumber(request.getPhoneNumber(), request.getPhonePrefix());
-
         modelMapper.map(request, account);
         Account saved = accountRepository.save(account);
 
