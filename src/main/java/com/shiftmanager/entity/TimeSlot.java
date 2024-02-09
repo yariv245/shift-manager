@@ -25,6 +25,7 @@ public class TimeSlot extends BaseEntity {
     private LocalDateTime endSlot;
 
     @OneToMany(mappedBy = "timeSlot",
-            targetEntity = Availability.class)
+            targetEntity = Availability.class,
+            fetch = FetchType.LAZY)
     private List<Availability> availabilities;
 }

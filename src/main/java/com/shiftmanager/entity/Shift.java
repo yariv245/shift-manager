@@ -24,11 +24,11 @@ public class Shift extends BaseEntity {
     @Column(name = "end_shift")
     private LocalDateTime endShift;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="work_schedule_id")
     private WorkSchedule workSchedule;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="account_id")
     private Account account;
 }

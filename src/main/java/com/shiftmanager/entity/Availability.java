@@ -20,11 +20,11 @@ public class Availability extends BaseEntity {
     private Long id;
     @Column(name = "available_day")
     private LocalDate availableDay;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="account_id")
     private Account account;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="time_slot_id")
     private TimeSlot timeSlot;
 }

@@ -20,16 +20,19 @@ public class Account extends BaseEntity {
     @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY,
+            cascade = CascadeType.PERSIST)
     @JoinColumn(name = "role_id")
     private Role role;
 
     @OneToMany(mappedBy = "account",
-            targetEntity = Shift.class)
+            targetEntity = Shift.class,
+            fetch = FetchType.LAZY)
     private List<Shift> shifts;
 
     @OneToMany(mappedBy = "account",
-            targetEntity = Availability.class)
+            targetEntity = Availability.class,
+            fetch = FetchType.LAZY)
     private List<Availability> availabilities;
 
 

@@ -21,7 +21,8 @@ public class Role extends BaseEntity {
     private Long id;
     @Column(name = "name")
     private String name;
-    @OneToMany(mappedBy = "role"
-            , targetEntity = Account.class)
+    @OneToMany(mappedBy = "role",
+            targetEntity = Account.class,
+            fetch = FetchType.LAZY)
     private List<Account> accounts;
 }
