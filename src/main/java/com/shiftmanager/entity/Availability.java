@@ -15,8 +15,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class Availability extends BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @GenericGenerator(name = "native")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id")
     private Long id;
     @Column(name = "available_day")

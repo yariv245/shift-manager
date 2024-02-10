@@ -24,18 +24,15 @@ public class AvailabilityImpl implements AvailabilityService {
 
     @Override
     public AvailabilityResponse create(CreateAvailability request) {
-        // find account
         Account account = getAccountById(request.getAccountId());
-        // find timeSlot
         TimeSlot timeSlot = getTimeSlotById(request.getTimeSlotId());
-        // create Availability
         Availability availability = Availability.builder()
                 .availableDay(request.getAvailableDay())
                 .account(account)
                 .timeSlot(timeSlot)
                 .build();
-        // save
         Availability saved = availabilityRepository.save(availability);
+
         return mapToAvailabilityResponse(saved);
     }
 

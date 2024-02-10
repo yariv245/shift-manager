@@ -19,7 +19,6 @@ public class CreateAvailability {
     @FutureOrPresent
     private LocalDate availableDay;
     @NotNull
-    @org.hibernate.validator.constraints.UUID
     private UUID accountId;
     @NotNull
     @Min(1)

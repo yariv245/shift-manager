@@ -17,8 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 public class TimeSlot extends BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @GenericGenerator(name = "native")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id")
     private Long id;
     @Column(name = "start_slot")

@@ -15,8 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Role extends BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @GenericGenerator(name = "native")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id")
     private Long id;
     @Column(name = "name")
