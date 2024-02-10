@@ -1,14 +1,20 @@
 package com.shiftmanager.controller;
 
 import com.shiftmanager.dto.request.CreateAvailability;
+import com.shiftmanager.dto.response.AccountResponse;
 import com.shiftmanager.dto.response.AvailabilityResponse;
 import com.shiftmanager.service.AvailabilityService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/availability")
@@ -27,16 +33,15 @@ public class AvailabilityController {
                 .body(response);
     }
 
-//    @GetMapping
-//    public ResponseEntity<AccountResponse> getByPhoneNumber(@RequestParam
-//                                                            @Pattern(regexp = "(^$|[0-9]{9})", message = "Mobile number must be 9 digits")
-//                                                                    String mobileNumber,
-//                                                            @NotBlank String mobileNumberPrefix) {
-//        AccountResponse response = accountService.getByPhoneNumber(mobileNumber, mobileNumberPrefix);
-//
-//        return ResponseEntity
-//                .ok(response);
-//    }
+    @GetMapping("/all")
+    public ResponseEntity<List<AvailabilityResponse>> getAllByAccountId(@Valid
+                                                                        @NotNull
+                                                                        @RequestParam UUID accountId) {
+        List<AvailabilityResponse> response = availabilityService.getAllByAccountId(accountId);
+
+        return ResponseEntity
+                .ok(response);
+    }
 //
 //    @PutMapping("/update")
 //    public ResponseEntity<AccountResponse> update(@Valid @RequestBody UpdateAccountRequest request) {

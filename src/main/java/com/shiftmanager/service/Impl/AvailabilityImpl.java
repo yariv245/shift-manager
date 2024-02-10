@@ -13,7 +13,9 @@ import com.shiftmanager.service.AvailabilityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -34,6 +36,15 @@ public class AvailabilityImpl implements AvailabilityService {
         Availability saved = availabilityRepository.save(availability);
 
         return mapToAvailabilityResponse(saved);
+    }
+
+    @Override
+    public List<AvailabilityResponse> getAllByAccountId(UUID accountId) {
+        return availabilityRepository
+                .findAllByAccount_Id(accountId)
+                .stream()
+                .map(this::mapToAvailabilityResponse)
+                .collect(Collectors.toList());
     }
 
     private TimeSlot getTimeSlotById(Long timeSlotId) {
