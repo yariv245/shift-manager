@@ -13,6 +13,7 @@ import java.time.LocalTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AvailabilityResponse {
+    private Long id;
     private LocalDate day;
     private LocalTime start;
     private LocalTime end;

@@ -1,12 +1,11 @@
 package com.shiftmanager.controller;
 
 import com.shiftmanager.dto.request.CreateAvailability;
-import com.shiftmanager.dto.response.AccountResponse;
+import com.shiftmanager.dto.request.UpdateTimeAvailability;
 import com.shiftmanager.dto.response.AvailabilityResponse;
 import com.shiftmanager.service.AvailabilityService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,12 +41,12 @@ public class AvailabilityController {
         return ResponseEntity
                 .ok(response);
     }
-//
-//    @PutMapping("/update")
-//    public ResponseEntity<AccountResponse> update(@Valid @RequestBody UpdateAccountRequest request) {
-//        AccountResponse response = accountService.update(request);
-//
-//        return ResponseEntity
-//                .ok(response);
-//    }
+
+    @PutMapping("/update/time")
+    public ResponseEntity<AvailabilityResponse> updateTime(@Valid @RequestBody UpdateTimeAvailability request) {
+        AvailabilityResponse response = availabilityService.updateTimeById(request);
+
+        return ResponseEntity
+                .ok(response);
+    }
 }

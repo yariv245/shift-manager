@@ -1,6 +1,7 @@
 package com.shiftmanager.service.Impl;
 
 import com.shiftmanager.dto.request.CreateAvailability;
+import com.shiftmanager.dto.request.UpdateTimeAvailability;
 import com.shiftmanager.dto.response.AvailabilityResponse;
 import com.shiftmanager.entity.Account;
 import com.shiftmanager.entity.Availability;
@@ -47,6 +48,21 @@ public class AvailabilityImpl implements AvailabilityService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public AvailabilityResponse updateTimeById(UpdateTimeAvailability request) {
+        Availability availability = getAvailability(request.getAvailabilityId());
+        TimeSlot timeSlot = getTimeSlotById(request.getTimeSlotId());
+        availability.setTimeSlot(timeSlot);
+        Availability saved = availabilityRepository.save(availability);
+
+        return mapToAvailabilityResponse(saved);
+    }
+
+    private Availability getAvailability(Long availabilityId) {
+        return availabilityRepository.findById(availabilityId)
+                .orElseThrow(() -> new ResourceNotFoundException("Availability", "Id", availabilityId));
+    }
+
     private TimeSlot getTimeSlotById(Long timeSlotId) {
         return timeSlotRepository.findById(timeSlotId)
                 .orElseThrow(() -> new ResourceNotFoundException("TimeSlot", "Id", timeSlotId));
@@ -59,6 +75,7 @@ public class AvailabilityImpl implements AvailabilityService {
 
     private AvailabilityResponse mapToAvailabilityResponse(Availability availability) {
         return AvailabilityResponse.builder()
+                .id(availability.getId())
                 .day(availability.getAvailableDay())
                 .start(availability.getTimeSlot().getStartSlot())
                 .end(availability.getTimeSlot().getEndSlot())
