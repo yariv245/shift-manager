@@ -37,7 +37,7 @@ public class AvailabilityImpl implements AvailabilityService {
                 .account(account)
                 .timeSlot(timeSlot)
                 .build();
-        availabilityValidator.validateCreate(availability);
+        availabilityValidator.validate(availability);
         Availability saved = availabilityRepository.save(availability);
 
         return mapToAvailabilityResponse(saved);
@@ -58,6 +58,7 @@ public class AvailabilityImpl implements AvailabilityService {
         Availability availability = getAvailability(request.getAvailabilityId());
         TimeSlot timeSlot = getTimeSlotById(request.getTimeSlotId());
         availability.setTimeSlot(timeSlot);
+        availabilityValidator.validate(availability);
         Availability saved = availabilityRepository.save(availability);
 
         return mapToAvailabilityResponse(saved);

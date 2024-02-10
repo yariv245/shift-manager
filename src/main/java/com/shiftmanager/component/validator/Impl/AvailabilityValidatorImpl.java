@@ -17,7 +17,7 @@ public class AvailabilityValidatorImpl implements AvailabilityValidator {
     private final AvailabilityRepository availabilityRepository;
 
     @Override
-    public void validateCreate(Availability availability) {
+    public void validate(Availability availability) {
         Optional<Availability> availabilityOptional = availabilityRepository.findByAccount_IdAndAvailableDayAndTimeSlot_Id(
                 availability.getAccount().getId(), availability.getAvailableDay(), availability.getTimeSlot().getId());
 
