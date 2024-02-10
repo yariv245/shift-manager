@@ -1,6 +1,7 @@
 package com.shiftmanager.service;
 
 import com.shiftmanager.dto.request.CreateAvailability;
+import com.shiftmanager.dto.request.DeactivateAvailabilities;
 import com.shiftmanager.dto.request.UpdateTimeAvailability;
 import com.shiftmanager.dto.response.AvailabilityResponse;
 
@@ -11,7 +12,9 @@ public interface AvailabilityService {
 
     AvailabilityResponse create(CreateAvailability request);
 
-    List<AvailabilityResponse> getAllByAccountId(UUID accountId);
+    List<AvailabilityResponse> getActiveByAccountId(UUID accountId);
 
     AvailabilityResponse updateTimeById(UpdateTimeAvailability request);
+
+    boolean deactivate(DeactivateAvailabilities request);
 }

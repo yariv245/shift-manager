@@ -1,6 +1,7 @@
 package com.shiftmanager.controller;
 
 import com.shiftmanager.dto.request.CreateAvailability;
+import com.shiftmanager.dto.request.DeactivateAvailabilities;
 import com.shiftmanager.dto.request.UpdateTimeAvailability;
 import com.shiftmanager.dto.response.AvailabilityResponse;
 import com.shiftmanager.service.AvailabilityService;
@@ -36,7 +37,7 @@ public class AvailabilityController {
     public ResponseEntity<List<AvailabilityResponse>> getAllByAccountId(@Valid
                                                                         @NotNull
                                                                         @RequestParam UUID accountId) {
-        List<AvailabilityResponse> response = availabilityService.getAllByAccountId(accountId);
+        List<AvailabilityResponse> response = availabilityService.getActiveByAccountId(accountId);
 
         return ResponseEntity
                 .ok(response);
@@ -45,6 +46,14 @@ public class AvailabilityController {
     @PutMapping("/update/time")
     public ResponseEntity<AvailabilityResponse> updateTime(@Valid @RequestBody UpdateTimeAvailability request) {
         AvailabilityResponse response = availabilityService.updateTimeById(request);
+
+        return ResponseEntity
+                .ok(response);
+    }
+
+    @PutMapping("/deactivate")
+    public ResponseEntity<Boolean> deactivate(@Valid @RequestBody DeactivateAvailabilities request) {
+        boolean response = availabilityService.deactivate(request);
 
         return ResponseEntity
                 .ok(response);

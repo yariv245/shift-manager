@@ -1,6 +1,7 @@
 package com.shiftmanager.service.Impl;
 
 import com.shiftmanager.dto.request.CreateAvailability;
+import com.shiftmanager.dto.request.DeactivateAvailabilities;
 import com.shiftmanager.dto.request.UpdateTimeAvailability;
 import com.shiftmanager.dto.response.AvailabilityResponse;
 import com.shiftmanager.entity.Account;
@@ -40,10 +41,11 @@ public class AvailabilityImpl implements AvailabilityService {
     }
 
     @Override
-    public List<AvailabilityResponse> getAllByAccountId(UUID accountId) {
+    public List<AvailabilityResponse> getActiveByAccountId(UUID accountId) {
         return availabilityRepository
                 .findAllByAccount_Id(accountId)
                 .stream()
+                .filter(Availability::isActive)
                 .map(this::mapToAvailabilityResponse)
                 .collect(Collectors.toList());
     }
@@ -56,6 +58,15 @@ public class AvailabilityImpl implements AvailabilityService {
         Availability saved = availabilityRepository.save(availability);
 
         return mapToAvailabilityResponse(saved);
+    }
+
+    @Override
+    public boolean deactivate(DeactivateAvailabilities request) {
+        List<Availability> availabilities = availabilityRepository.findAllById(request.getAvailabilityIds());
+        availabilities.forEach(availability -> availability.setActive(false));
+        availabilityRepository.saveAll(availabilities);
+
+        return true;
     }
 
     private Availability getAvailability(Long availabilityId) {
