@@ -1,5 +1,6 @@
 package com.shiftmanager.service.Impl;
 
+import com.shiftmanager.component.validator.AvailabilityValidator;
 import com.shiftmanager.dto.request.CreateAvailability;
 import com.shiftmanager.dto.request.DeactivateAvailabilities;
 import com.shiftmanager.dto.request.UpdateTimeAvailability;
@@ -23,6 +24,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class AvailabilityImpl implements AvailabilityService {
     private final AvailabilityRepository availabilityRepository;
+    private final AvailabilityValidator availabilityValidator;
     private final AccountRepository accountRepository;
     private final TimeSlotRepository timeSlotRepository;
 
@@ -35,6 +37,7 @@ public class AvailabilityImpl implements AvailabilityService {
                 .account(account)
                 .timeSlot(timeSlot)
                 .build();
+        availabilityValidator.validateCreate(availability);
         Availability saved = availabilityRepository.save(availability);
 
         return mapToAvailabilityResponse(saved);

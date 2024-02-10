@@ -78,4 +78,18 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 .status(HttpStatus.NOT_FOUND)
                 .body(exceptionResponse);
     }
+
+    @ExceptionHandler(AvailabilityExistsException.class)
+    public ResponseEntity<ExceptionResponse> handleAvailabilityAlreadyExistException(AvailabilityExistsException exception,
+                                                                                 WebRequest webRequest) {
+        ExceptionResponse exceptionResponse = ExceptionResponse.builder()
+                .apiPath(webRequest.getDescription(false))
+                .errorCode(HttpStatus.BAD_REQUEST)
+                .errorMessage(exception.getMessage())
+                .build();
+
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(exceptionResponse);
+    }
 }
