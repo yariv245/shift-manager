@@ -10,6 +10,7 @@ import java.util.UUID;
 
 @Entity(name = "account")
 @Getter
+@Builder
 @Setter
 @ToString
 @AllArgsConstructor
