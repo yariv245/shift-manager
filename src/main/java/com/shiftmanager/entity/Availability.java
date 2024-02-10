@@ -20,6 +20,10 @@ public class Availability extends BaseEntity {
     private Long id;
     @Column(name = "available_day")
     private LocalDate availableDay;
+    @Builder.Default
+    @Column(name = "active")
+    private boolean active = true;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "account_id")
     private Account account;
