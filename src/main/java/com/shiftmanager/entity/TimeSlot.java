@@ -29,4 +29,9 @@ public class TimeSlot extends BaseEntity {
             targetEntity = Availability.class,
             fetch = FetchType.LAZY)
     private List<Availability> availabilities;
+
+    @OneToMany(mappedBy = "timeSlot",
+            targetEntity = ShiftConfiguration.class,
+            fetch = FetchType.LAZY)
+    private List<ShiftConfiguration> shiftConfigurations;
 }
