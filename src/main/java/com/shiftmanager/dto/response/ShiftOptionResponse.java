@@ -13,9 +13,8 @@ import java.time.LocalTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ShiftOptionResponse {
-    private Long id;
     private LocalDate day;
     private LocalTime start;
     private LocalTime end;
-    private Long amountOfWorkers;
+    private Integer amountOfWorkers;
 }

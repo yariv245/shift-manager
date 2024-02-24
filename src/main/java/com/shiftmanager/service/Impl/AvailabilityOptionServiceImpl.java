@@ -35,7 +35,7 @@ public class AvailabilityOptionServiceImpl implements AvailabilityOptionService 
                 .orElseThrow(() -> new ResourceNotFoundException("Account", "accountId", accountId));
         UUID departmentId = account.getDepartment().getId();
         WorkScheduleConfiguration workScheduleConfiguration = workScheduleConfigurationRepository.findByDepartment_Id(departmentId)
-                .orElseThrow(() -> new ResourceNotFoundException("Department", "departmentId", departmentId));
+                .orElseThrow(() -> new ResourceNotFoundException("WorkScheduleConfiguration", "departmentId", departmentId));
 
         return mapToWorkScheduleOptions(workScheduleConfiguration);
     }
@@ -58,10 +58,11 @@ public class AvailabilityOptionServiceImpl implements AvailabilityOptionService 
                 .day(day)
                 .start(shiftConfiguration.getTimeSlot().getStartSlot())
                 .end(shiftConfiguration.getTimeSlot().getEndSlot())
+                .amountOfWorkers(shiftConfiguration.getAmountOfWorkers())
                 .build();
     }
 
     private LocalDate getShiftDay(ShiftConfiguration shiftConfiguration, LocalDateTime startSchedule) {
-        return startSchedule.plusDays(shiftConfiguration.getDay()).toLocalDate();
+        return startSchedule.plusDays(shiftConfiguration.getShiftDay()).toLocalDate();
     }
 }

@@ -10,6 +10,7 @@ import java.util.UUID;
 @Entity(name = "work_schedule_configuration")
 @Getter
 @Setter
+@Builder
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,13 +23,12 @@ public class WorkScheduleConfiguration extends BaseEntity {
     private LocalDateTime startSchedule;
     @Column(name = "end_schedule")
     private LocalDateTime endSchedule;
-    @Column(name = "work_schedule_department_id")
-    private UUID work_schedule_department_id;
 
     @OneToMany(mappedBy = "workScheduleConfiguration",
             targetEntity = ShiftConfiguration.class)
     private List<ShiftConfiguration> shiftConfigurations;
 
-    @OneToOne(mappedBy = "workScheduleConfiguration")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "department_id", referencedColumnName = "id")
     private Department department;
 }

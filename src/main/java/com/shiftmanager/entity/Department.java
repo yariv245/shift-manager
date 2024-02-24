@@ -9,6 +9,7 @@ import java.util.UUID;
 @Entity(name = "department")
 @Getter
 @Setter
+@Builder
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,7 +26,6 @@ public class Department extends BaseEntity {
             fetch = FetchType.LAZY)
     private List<Account> accounts;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "department_id")
+    @OneToOne(mappedBy = "department")
     private WorkScheduleConfiguration workScheduleConfiguration;
 }
