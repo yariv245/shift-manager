@@ -35,3 +35,8 @@ Ref: shift_configuration.work_schedule_configuration_id> work_schedule_configura
 
 // Use DBML to define your database structure
 // Docs: https://dbml.dbdiagram.io/docs
+
+
+work_schedule and shift visual
+![demo](https://github.com/yariv245/shift-manager/assets/6500992/de2c64f7-a65f-498d-9d30-8ab2b53bdf04)
+
