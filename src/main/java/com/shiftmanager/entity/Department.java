@@ -28,4 +28,9 @@ public class Department extends BaseEntity {
 
     @OneToOne(mappedBy = "department")
     private WorkScheduleConfiguration workScheduleConfiguration;
+
+    @OneToMany(mappedBy = "department",
+            targetEntity = WorkSchedule.class,
+            fetch = FetchType.LAZY)
+    private List<WorkSchedule> workSchedules;
 }

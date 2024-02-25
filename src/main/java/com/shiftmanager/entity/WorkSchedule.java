@@ -24,7 +24,14 @@ public class WorkSchedule extends BaseEntity {
     private LocalDateTime endSchedule;
     @Column(name = "amount_of_workers")
     private Long amountOfWorkers;
+    @Column(name = "work_schedule_number")
+    private Long workScheduleNumber;
+
     @OneToMany(mappedBy = "workSchedule",
             targetEntity = Shift.class)
     private List<Shift> shifts;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "department_id")
+    private Department department;
 }

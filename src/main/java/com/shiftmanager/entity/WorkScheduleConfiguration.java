@@ -19,10 +19,8 @@ public class WorkScheduleConfiguration extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id")
     private Long id;
-    @Column(name = "start_schedule")
-    private LocalDateTime startSchedule;
-    @Column(name = "end_schedule")
-    private LocalDateTime endSchedule;
+    @Column(name = "amount_of_days")
+    private Integer amountOfDays;
 
     @OneToMany(mappedBy = "workScheduleConfiguration",
             targetEntity = ShiftConfiguration.class)

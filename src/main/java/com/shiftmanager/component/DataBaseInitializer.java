@@ -66,8 +66,7 @@ public class DataBaseInitializer implements CommandLineRunner {
 
     private WorkScheduleConfiguration initializeWorkScheduleConfiguration(Department department) {
         WorkScheduleConfiguration workScheduleConfiguration = WorkScheduleConfiguration.builder()
-                .startSchedule(LocalDateTime.of(2024, Month.FEBRUARY, 18, 0, 0))
-                .endSchedule(LocalDateTime.of(2024, Month.FEBRUARY, 25, 0, 0))
+                .amountOfDays(7)
                 .department(department)
                 .build();
 
