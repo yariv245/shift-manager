@@ -16,6 +16,7 @@ import com.shiftmanager.service.AvailabilityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -29,18 +30,22 @@ public class AvailabilityImpl implements AvailabilityService {
     private final TimeSlotRepository timeSlotRepository;
 
     @Override
-    public AvailabilityResponse create(CreateAvailability request) {
+    public List<AvailabilityResponse> create(CreateAvailability request) {
         Account account = getAccountById(request.getAccountId());
-        TimeSlot timeSlot = getTimeSlotById(request.getTimeSlotId());
-        Availability availability = Availability.builder()
-                .availableDay(request.getAvailableDay())
-                .account(account)
-                .timeSlot(timeSlot)
-                .build();
-        availabilityValidator.validate(availability);
-        Availability saved = availabilityRepository.save(availability);
+        List<TimeSlot> timeSlots = getTimeSlotByIds(request.getTimeSlotIds());
+        List<Availability> availabilities = timeSlots.stream()
+                .map(timeSlot -> Availability.builder()
+                        .availableDay(request.getAvailableDay())
+                        .account(account)
+                        .timeSlot(timeSlot)
+                        .build())
+                .collect(Collectors.toList());
+        availabilityValidator.validate(availabilities);
 
-        return mapToAvailabilityResponse(saved);
+        return availabilityRepository.saveAll(availabilities)
+                .stream()
+                .map(this::mapToAvailabilityResponse)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -76,6 +81,10 @@ public class AvailabilityImpl implements AvailabilityService {
     private Availability getAvailability(Long availabilityId) {
         return availabilityRepository.findById(availabilityId)
                 .orElseThrow(() -> new ResourceNotFoundException("Availability", "Id", availabilityId));
+    }
+
+    private List<TimeSlot> getTimeSlotByIds(Collection<Long> timeSlotIds) {
+        return timeSlotRepository.findAllById(timeSlotIds);
     }
 
     private TimeSlot getTimeSlotById(Long timeSlotId) {

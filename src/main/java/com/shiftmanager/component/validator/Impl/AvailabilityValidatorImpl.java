@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -23,6 +24,12 @@ public class AvailabilityValidatorImpl implements AvailabilityValidator {
 
         if (availabilityOptional.isPresent())
             throwAvailabilityExists(availability);
+    }
+
+    @Override
+    public void validate(List<Availability> availabilities) {
+        availabilities
+                .forEach(this::validate);
     }
 
     private void throwAvailabilityExists(Availability availability) {
