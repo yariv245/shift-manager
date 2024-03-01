@@ -2,11 +2,11 @@ package com.shiftmanager.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
 
 import java.util.List;
 
-@Entity(name = "role")
+@Entity
+@Table(name = "role")
 @Getter
 @Builder
 @Setter

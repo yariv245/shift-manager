@@ -6,7 +6,8 @@ import lombok.*;
 import java.util.List;
 import java.util.UUID;
 
-@Entity(name = "department")
+@Entity
+@Table(name = "department")
 @Getter
 @Setter
 @Builder

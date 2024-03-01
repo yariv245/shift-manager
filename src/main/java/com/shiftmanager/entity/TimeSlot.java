@@ -2,13 +2,12 @@ package com.shiftmanager.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
 
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
-@Entity(name = "time_slot")
+@Entity
+@Table(name = "time_slot")
 @Getter
 @Setter
 @Builder

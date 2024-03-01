@@ -2,12 +2,9 @@ package com.shiftmanager.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.data.relational.core.sql.In;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-
-@Entity(name = "shift_configuration")
+@Entity
+@Table(name = "shift_configuration")
 @Getter
 @Setter
 @Builder

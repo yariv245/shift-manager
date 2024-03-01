@@ -2,12 +2,12 @@ package com.shiftmanager.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Entity(name = "work_schedule")
+@Entity
+@Table(name = "work_schedule")
 @Getter
 @Setter
 @ToString

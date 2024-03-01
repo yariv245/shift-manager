@@ -2,12 +2,11 @@ package com.shiftmanager.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
-@Entity(name = "shift")
+@Entity
+@Table(name = "shift")
 @Getter
 @Setter
 @ToString

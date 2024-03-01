@@ -2,11 +2,11 @@ package com.shiftmanager.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDate;
 
-@Entity(name = "availability")
+@Entity
+@Table(name = "availability")
 @Getter
 @Builder
 @Setter

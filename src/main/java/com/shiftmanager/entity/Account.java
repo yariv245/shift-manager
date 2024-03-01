@@ -2,13 +2,13 @@ package com.shiftmanager.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
-@Entity(name = "account")
+@Entity
+@Table(name = "account")
 @Getter
 @Builder
 @Setter
@@ -36,6 +36,10 @@ public class Account extends BaseEntity {
             fetch = FetchType.LAZY)
     private List<Availability> availabilities;
 
+    @ManyToOne(fetch = FetchType.LAZY,
+            cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "department_id")
+    private Department department;
 
     @Column(name = "address")
     private String address;

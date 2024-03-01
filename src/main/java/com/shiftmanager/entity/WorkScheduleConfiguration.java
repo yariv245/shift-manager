@@ -3,11 +3,10 @@ package com.shiftmanager.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
-@Entity(name = "work_schedule_configuration")
+@Entity
+@Table(name = "work_schedule_configuration")
 @Getter
 @Setter
 @Builder
