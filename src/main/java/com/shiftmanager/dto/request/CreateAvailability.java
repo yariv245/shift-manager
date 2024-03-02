@@ -20,7 +20,7 @@ import java.util.UUID;
 public class CreateAvailability {
     @FutureOrPresent
     private LocalDate availableDay;
-    @NotNull
+    @org.hibernate.validator.constraints.UUID
     private UUID accountId;
     @NotNull
     @NotEmpty
