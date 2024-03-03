@@ -7,16 +7,13 @@ import com.shiftmanager.dto.request.UpdateTimeAvailability;
 import com.shiftmanager.dto.response.AvailabilityResponse;
 import com.shiftmanager.entity.Account;
 import com.shiftmanager.entity.Availability;
-import com.shiftmanager.entity.TimeSlot;
 import com.shiftmanager.exception.ResourceNotFoundException;
 import com.shiftmanager.repository.AccountRepository;
 import com.shiftmanager.repository.AvailabilityRepository;
-import com.shiftmanager.repository.TimeSlotRepository;
 import com.shiftmanager.service.AvailabilityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -27,25 +24,18 @@ public class AvailabilityImpl implements AvailabilityService {
     private final AvailabilityRepository availabilityRepository;
     private final AvailabilityValidator availabilityValidator;
     private final AccountRepository accountRepository;
-    private final TimeSlotRepository timeSlotRepository;
 
     @Override
-    public List<AvailabilityResponse> create(CreateAvailability request) {
+    public AvailabilityResponse create(CreateAvailability request) {
         Account account = getAccountById(request.getAccountId());
-        List<TimeSlot> timeSlots = getTimeSlotByIds(request.getTimeSlotIds());
-        List<Availability> availabilities = timeSlots.stream()
-                .map(timeSlot -> Availability.builder()
-                        .availableDay(request.getAvailableDay())
-                        .account(account)
-                        .timeSlot(timeSlot)
-                        .build())
-                .collect(Collectors.toList());
-        availabilityValidator.validate(availabilities);
+        Availability availability = Availability.builder()
+                .day(request.getAvailableDay())
+                .account(account)
+                .build();
+        availabilityValidator.validate(availability);
+        Availability saved = availabilityRepository.save(availability);
 
-        return availabilityRepository.saveAll(availabilities)
-                .stream()
-                .map(this::mapToAvailabilityResponse)
-                .collect(Collectors.toList());
+        return mapToAvailabilityResponse(saved);
     }
 
     @Override
@@ -61,8 +51,7 @@ public class AvailabilityImpl implements AvailabilityService {
     @Override
     public AvailabilityResponse updateTimeById(UpdateTimeAvailability request) {
         Availability availability = getAvailability(request.getAvailabilityId());
-        TimeSlot timeSlot = getTimeSlotById(request.getTimeSlotId());
-        availability.setTimeSlot(timeSlot);
+        // todo: udpate the start and end
         availabilityValidator.validate(availability);
         Availability saved = availabilityRepository.save(availability);
 
@@ -83,15 +72,6 @@ public class AvailabilityImpl implements AvailabilityService {
                 .orElseThrow(() -> new ResourceNotFoundException("Availability", "Id", availabilityId));
     }
 
-    private List<TimeSlot> getTimeSlotByIds(Collection<Long> timeSlotIds) {
-        return timeSlotRepository.findAllById(timeSlotIds);
-    }
-
-    private TimeSlot getTimeSlotById(Long timeSlotId) {
-        return timeSlotRepository.findById(timeSlotId)
-                .orElseThrow(() -> new ResourceNotFoundException("TimeSlot", "Id", timeSlotId));
-    }
-
     private Account getAccountById(UUID accountId) {
         return accountRepository.findById(accountId)
                 .orElseThrow(() -> new ResourceNotFoundException("Account", "Id", accountId));
@@ -100,9 +80,10 @@ public class AvailabilityImpl implements AvailabilityService {
     private AvailabilityResponse mapToAvailabilityResponse(Availability availability) {
         return AvailabilityResponse.builder()
                 .id(availability.getId())
-                .day(availability.getAvailableDay())
-                .start(availability.getTimeSlot().getStartSlot())
-                .end(availability.getTimeSlot().getEndSlot())
+                .day(availability.getDay())
+                // todo: set the start and end time
+//                .start(availability.getTimeSlot().getStartSlot())
+//                .end(availability.getTimeSlot().getEndSlot())
                 .build();
     }
 }

@@ -3,6 +3,8 @@ package com.shiftmanager.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalTime;
+
 @Entity
 @Table(name = "shift_configuration")
 @Getter
@@ -20,12 +22,12 @@ public class ShiftConfiguration extends BaseEntity {
     private Integer amountOfWorkers;
     @Column(name = "shift_day")
     private Integer shiftDay;
+    @Column(name = "start_time")
+    private LocalTime startTime;
+    @Column(name = "length")
+    private LocalTime length;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "work_schedule_configuration_id")
     private WorkScheduleConfiguration workScheduleConfiguration;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "time_slot_id")
-    private TimeSlot timeSlot;
 }

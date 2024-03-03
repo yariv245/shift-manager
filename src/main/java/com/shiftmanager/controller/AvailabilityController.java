@@ -25,8 +25,8 @@ public class AvailabilityController {
     private final AvailabilityService availabilityService;
 
     @PostMapping("/create")
-    public ResponseEntity<List<AvailabilityResponse>> createAvailability(@Valid @RequestBody CreateAvailability request) {
-        List<AvailabilityResponse> response = availabilityService.create(request);
+    public ResponseEntity<AvailabilityResponse> createAvailability(@Valid @RequestBody CreateAvailability request) {
+        AvailabilityResponse response = availabilityService.create(request);
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)

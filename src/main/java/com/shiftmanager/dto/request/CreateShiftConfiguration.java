@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalTime;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -17,5 +19,7 @@ public class CreateShiftConfiguration {
     @Min(1)
     private Integer shiftDay;
     @NotNull
-    private CreateTimeSlot timeSlot;
+    private LocalTime startTime;
+    @NotNull
+    private LocalTime endTime;
 }

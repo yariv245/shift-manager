@@ -7,8 +7,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.Month;
 import java.util.List;
 import java.util.UUID;
@@ -18,7 +16,6 @@ import java.util.UUID;
 public class DataBaseInitializer implements CommandLineRunner {
 
     private final RoleRepository roleRepository;
-    private final TimeSlotRepository timeSlotRepository;
     private final AccountRepository accountRepository;
     private final DepartmentRepository departmentRepository;
     private final WorkScheduleConfigurationRepository workScheduleConfigurationRepository;
@@ -28,37 +25,32 @@ public class DataBaseInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         List<Role> roles = initializeRole();
-        List<TimeSlot> timeSlots = initializeTimeSlot();
         Department department = initializeDepartment();
         initializeAccount(roles, department);
         WorkScheduleConfiguration workScheduleConfiguration = initializeWorkScheduleConfiguration(department);
-        initializeShiftConfiguration(workScheduleConfiguration, timeSlots);
+        initializeShiftConfiguration(workScheduleConfiguration);
     }
 
-    private List<ShiftConfiguration> initializeShiftConfiguration(WorkScheduleConfiguration workScheduleConfiguration, List<TimeSlot> timeSlots) {
+    private List<ShiftConfiguration> initializeShiftConfiguration(WorkScheduleConfiguration workScheduleConfiguration) {
         ShiftConfiguration shiftConfiguration = ShiftConfiguration.builder()
                 .amountOfWorkers(2)
                 .shiftDay(0)
                 .workScheduleConfiguration(workScheduleConfiguration)
-                .timeSlot(timeSlots.get(0))
                 .build();
         ShiftConfiguration shiftConfiguration2 = ShiftConfiguration.builder()
                 .amountOfWorkers(3)
                 .shiftDay(0)
                 .workScheduleConfiguration(workScheduleConfiguration)
-                .timeSlot(timeSlots.get(1))
                 .build();
         ShiftConfiguration shiftConfiguration3 = ShiftConfiguration.builder()
                 .amountOfWorkers(1)
                 .shiftDay(0)
                 .workScheduleConfiguration(workScheduleConfiguration)
-                .timeSlot(timeSlots.get(2))
                 .build();
         ShiftConfiguration shiftConfiguration4 = ShiftConfiguration.builder()
                 .amountOfWorkers(1)
                 .shiftDay(0)
                 .workScheduleConfiguration(workScheduleConfiguration)
-                .timeSlot(timeSlots.get(3))
                 .build();
 
         return shiftConfigurationRepository.saveAll(List.of(shiftConfiguration, shiftConfiguration2, shiftConfiguration3, shiftConfiguration4));
@@ -97,31 +89,6 @@ public class DataBaseInitializer implements CommandLineRunner {
                 .build();
 
         accountRepository.save(account);
-    }
-
-    private List<TimeSlot> initializeTimeSlot() {
-        TimeSlot first = TimeSlot.builder()
-                .startSlot(LocalTime.of(6, 0))
-                .endSlot(LocalTime.of(15, 0))
-                .build();
-
-        TimeSlot mid = TimeSlot.builder()
-                .startSlot(LocalTime.of(7, 0))
-                .endSlot(LocalTime.of(16, 0))
-                .build();
-
-        TimeSlot mid2 = TimeSlot.builder()
-                .startSlot(LocalTime.of(8, 0))
-                .endSlot(LocalTime.of(17, 0))
-                .build();
-
-        TimeSlot last = TimeSlot.builder()
-                .startSlot(LocalTime.of(10, 0))
-                .endSlot(LocalTime.of(19, 0))
-                .build();
-
-        return timeSlotRepository.saveAll(List.of(first, mid, mid2, last));
-
     }
 
     private List<Role> initializeRole() {

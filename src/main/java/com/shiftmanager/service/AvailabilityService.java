@@ -10,7 +10,7 @@ import java.util.UUID;
 
 public interface AvailabilityService {
 
-    List<AvailabilityResponse> create(CreateAvailability request);
+    AvailabilityResponse create(CreateAvailability request);
 
     List<AvailabilityResponse> getActiveByAccountId(UUID accountId);
 

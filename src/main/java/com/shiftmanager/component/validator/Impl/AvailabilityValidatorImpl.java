@@ -2,7 +2,6 @@ package com.shiftmanager.component.validator.Impl;
 
 import com.shiftmanager.component.validator.AvailabilityValidator;
 import com.shiftmanager.entity.Availability;
-import com.shiftmanager.entity.TimeSlot;
 import com.shiftmanager.exception.AvailabilityExistsException;
 import com.shiftmanager.repository.AvailabilityRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,10 +18,11 @@ public class AvailabilityValidatorImpl implements AvailabilityValidator {
 
     @Override
     public void validate(Availability availability) {
+        // todo: fix the start and end time
         Optional<Availability> availabilityOptional = availabilityRepository.findByAccount_IdAndAvailableDayAndTimeSlot_Id(
-                availability.getAccount().getId(), availability.getAvailableDay(), availability.getTimeSlot().getId());
+                availability.getAccount().getId(), availability.getDay(), 123L);
 
-        if (availabilityOptional.isPresent())
+        if (availabilityOptional.isPresent()) // todo: change it to Exception and catch in the controller adviser
             throwAvailabilityExists(availability);
     }
 
@@ -33,10 +33,10 @@ public class AvailabilityValidatorImpl implements AvailabilityValidator {
     }
 
     private void throwAvailabilityExists(Availability availability) {
-        LocalDate availableDay = availability.getAvailableDay();
-        TimeSlot timeSlot = availability.getTimeSlot();
+        LocalDate availableDay = availability.getDay();
+//        TimeSlot timeSlot = availability.getTimeSlot();
         String format = String.format("Availability Exists day: %s , start: %s , end: %S", availableDay,
-                timeSlot.getStartSlot(), timeSlot.getEndSlot());
+                "startTime", "endTime");
 
         throw new AvailabilityExistsException(format);
     }

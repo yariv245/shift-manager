@@ -18,8 +18,8 @@ public class Availability extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id")
     private Long id;
-    @Column(name = "available_day")
-    private LocalDate availableDay;
+    @Column(name = "day")
+    private LocalDate day;
     @Builder.Default
     @Column(name = "active")
     private boolean active = true;
@@ -27,8 +27,4 @@ public class Availability extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "account_id")
     private Account account;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "time_slot_id")
-    private TimeSlot timeSlot;
 }

@@ -61,8 +61,9 @@ public class AvailabilityOptionServiceImpl implements AvailabilityOptionService 
 
         return ShiftOptionResponse.builder()
                 .day(day)
-                .start(shiftConfiguration.getTimeSlot().getStartSlot())
-                .end(shiftConfiguration.getTimeSlot().getEndSlot())
+                // todo: fix the start and end time
+//                .start(shiftConfiguration.getTimeSlot().getStartSlot())
+//                .end(shiftConfiguration.getTimeSlot().getEndSlot())
                 .amountOfWorkers(shiftConfiguration.getAmountOfWorkers())
                 .build();
     }
