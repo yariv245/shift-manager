@@ -22,6 +22,8 @@ public class Shift extends BaseEntity {
     private LocalDateTime start;
     @Column(name = "end")
     private LocalDateTime end;
+    @Column(name = "publish")
+    private Boolean publish = false;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="work_schedule_id")

@@ -27,6 +27,8 @@ public class WorkSchedule extends BaseEntity {
     private Long amountOfWorkers;
     @Column(name = "work_schedule_number")
     private Long workScheduleNumber;
+    @Column(name = "publish")
+    private Boolean publish = false;
 
     @OneToMany(mappedBy = "workSchedule",
             targetEntity = Shift.class)
