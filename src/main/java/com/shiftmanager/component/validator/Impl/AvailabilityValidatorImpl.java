@@ -19,11 +19,11 @@ public class AvailabilityValidatorImpl implements AvailabilityValidator {
     @Override
     public void validate(Availability availability) {
         // todo: fix the start and end time
-        Optional<Availability> availabilityOptional = availabilityRepository.findByAccount_IdAndAvailableDayAndTimeSlot_Id(
-                availability.getAccount().getId(), availability.getDay(), 123L);
+//        Optional<Availability> availabilityOptional = availabilityRepository.findByAccount_IdAndAvailableDayAndTimeSlot_Id(
+//                availability.getAccount().getId(), availability.getDay(), 123L);
 
-        if (availabilityOptional.isPresent()) // todo: change it to Exception and catch in the controller adviser
-            throwAvailabilityExists(availability);
+//        if (availabilityOptional.isPresent()) // todo: change it to Exception and catch in the controller adviser
+//            throwAvailabilityExists(availability);
     }
 
     @Override
@@ -33,11 +33,11 @@ public class AvailabilityValidatorImpl implements AvailabilityValidator {
     }
 
     private void throwAvailabilityExists(Availability availability) {
-        LocalDate availableDay = availability.getDay();
+//        LocalDate availableDay = availability.getDay();
 //        TimeSlot timeSlot = availability.getTimeSlot();
-        String format = String.format("Availability Exists day: %s , start: %s , end: %S", availableDay,
-                "startTime", "endTime");
-
-        throw new AvailabilityExistsException(format);
+//        String format = String.format("Availability Exists day: %s , start: %s , end: %S", availableDay,
+//                "startTime", "endTime");
+//
+//        throw new AvailabilityExistsException(format);
     }
 }

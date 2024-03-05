@@ -34,4 +34,9 @@ public class WorkSchedule extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "department_id")
     private Department department;
+
+    @OneToMany(mappedBy = "workSchedule",
+            targetEntity = Availability.class,
+            fetch = FetchType.LAZY)
+    private List<Availability> availabilities;
 }

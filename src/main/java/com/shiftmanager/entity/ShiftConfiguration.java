@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalTime;
+import java.util.List;
 
 @Entity
 @Table(name = "shift_configuration")
@@ -21,7 +22,7 @@ public class ShiftConfiguration extends BaseEntity {
     @Column(name = "amount_of_workers")
     private Integer amountOfWorkers;
     @Column(name = "shift_day")
-    private Integer shiftDay;
+    private Integer day;
     @Column(name = "start_time")
     private LocalTime startTime;
     @Column(name = "length")
@@ -30,4 +31,9 @@ public class ShiftConfiguration extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "work_schedule_configuration_id")
     private WorkScheduleConfiguration workScheduleConfiguration;
+
+    @OneToMany(mappedBy = "shiftConfiguration",
+            targetEntity = Availability.class,
+            fetch = FetchType.LAZY)
+    private List<Availability> availabilities;
 }

@@ -69,6 +69,6 @@ public class AvailabilityOptionServiceImpl implements AvailabilityOptionService 
     }
 
     private LocalDate getShiftDay(ShiftConfiguration shiftConfiguration, LocalDateTime startSchedule) {
-        return startSchedule.plusDays(shiftConfiguration.getShiftDay()).toLocalDate();
+        return startSchedule.plusDays(shiftConfiguration.getDay()).toLocalDate();
     }
 }

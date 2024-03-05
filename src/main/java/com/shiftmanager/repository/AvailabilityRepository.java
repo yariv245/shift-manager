@@ -13,6 +13,6 @@ import java.util.UUID;
 public interface AvailabilityRepository extends JpaRepository<Availability, Long> {
     List<Availability> findAllByAccount_Id(UUID accountId);
 
-    Optional<Availability> findByAccount_IdAndAvailableDayAndTimeSlot_Id
-            (UUID accountId, LocalDate day, Long timeSlotId);
+//    Optional<Availability> findByAccount_IdAndAvailableDayAndTimeSlot_Id
+//            (UUID accountId, LocalDate day, Long timeSlotId);
 }

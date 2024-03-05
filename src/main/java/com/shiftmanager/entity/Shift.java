@@ -17,10 +17,10 @@ public class Shift extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id")
     private Long id;
-    @Column(name = "start_shift")
-    private LocalDateTime startShift;
-    @Column(name = "end_shift")
-    private LocalDateTime endShift;
+    @Column(name = "start")
+    private LocalDateTime start;
+    @Column(name = "end")
+    private LocalDateTime end;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="work_schedule_id")

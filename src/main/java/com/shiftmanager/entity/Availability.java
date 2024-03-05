@@ -3,7 +3,6 @@ package com.shiftmanager.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
 
 @Entity
 @Table(name = "availability")
@@ -18,8 +17,6 @@ public class Availability extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id")
     private Long id;
-    @Column(name = "day")
-    private LocalDate day;
     @Builder.Default
     @Column(name = "active")
     private boolean active = true;
@@ -27,4 +24,12 @@ public class Availability extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "account_id")
     private Account account;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "shift_configuration_id")
+    private ShiftConfiguration shiftConfiguration;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "work_schedule_id")
+    private WorkSchedule workSchedule;
 }

@@ -29,7 +29,7 @@ public class AvailabilityImpl implements AvailabilityService {
     public AvailabilityResponse create(CreateAvailability request) {
         Account account = getAccountById(request.getAccountId());
         Availability availability = Availability.builder()
-                .day(request.getAvailableDay())
+//                .day(request.getAvailableDay())
                 .account(account)
                 .build();
         availabilityValidator.validate(availability);
@@ -80,7 +80,7 @@ public class AvailabilityImpl implements AvailabilityService {
     private AvailabilityResponse mapToAvailabilityResponse(Availability availability) {
         return AvailabilityResponse.builder()
                 .id(availability.getId())
-                .day(availability.getDay())
+//                .day(availability.getDay())
                 // todo: set the start and end time
 //                .start(availability.getTimeSlot().getStartSlot())
 //                .end(availability.getTimeSlot().getEndSlot())

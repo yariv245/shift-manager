@@ -34,22 +34,22 @@ public class DataBaseInitializer implements CommandLineRunner {
     private List<ShiftConfiguration> initializeShiftConfiguration(WorkScheduleConfiguration workScheduleConfiguration) {
         ShiftConfiguration shiftConfiguration = ShiftConfiguration.builder()
                 .amountOfWorkers(2)
-                .shiftDay(0)
+                .day(0)
                 .workScheduleConfiguration(workScheduleConfiguration)
                 .build();
         ShiftConfiguration shiftConfiguration2 = ShiftConfiguration.builder()
                 .amountOfWorkers(3)
-                .shiftDay(0)
+                .day(0)
                 .workScheduleConfiguration(workScheduleConfiguration)
                 .build();
         ShiftConfiguration shiftConfiguration3 = ShiftConfiguration.builder()
                 .amountOfWorkers(1)
-                .shiftDay(0)
+                .day(0)
                 .workScheduleConfiguration(workScheduleConfiguration)
                 .build();
         ShiftConfiguration shiftConfiguration4 = ShiftConfiguration.builder()
                 .amountOfWorkers(1)
-                .shiftDay(0)
+                .day(0)
                 .workScheduleConfiguration(workScheduleConfiguration)
                 .build();
 
