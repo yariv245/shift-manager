@@ -18,17 +18,19 @@ Table shift_configuration -> hold all the configuration needed for creating work
 Example: which timeslot,how many workers in that shift...
 
 Relatins:
-Ref: acccount.role_id > role.id \
-Ref: acccount.id < availability.id 
-Ref: acccount.department_id > department.id\
-Ref: work_schedule.id < shift.work_schedule_id\
+Ref: acccount.role_id > role.id
+Ref: acccount.department_id > department.id
+Ref: acccount.id < availability.account_id 
+Ref: acccount.id < shift.account_id
 Ref: shift_configuration.id < availability.shift_configuration_id
+Ref: shift_configuration.id > work_schedule_configuration.id
+Ref: work_schedule.id < shift.work_schedule_id
 Ref: work_schedule.id < availability.work_schedule_id
-Ref: work_schedule_configuration.department_id - department.id
 Ref: work_schedule.department_id > department.id
-Ref: shift_configuration.work_schedule_configuration_id > work_schedule_configuration.id
+Ref: work_schedule_configuration - department.id
 
-![ShiftManager (3)](https://github.com/yariv245/shift-manager/assets/6500992/f849b7ed-9bd6-4156-b9dc-86a2b859a5ce)
+
+![ShiftManager (4)](https://github.com/yariv245/shift-manager/assets/6500992/8ccc9f66-c14e-40a5-aa9d-2a01b0d460df)
 
 // Use DBML to define your database structure
 // Docs: https://dbml.dbdiagram.io/docs
