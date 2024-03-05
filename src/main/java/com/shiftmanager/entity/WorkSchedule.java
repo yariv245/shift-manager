@@ -5,6 +5,7 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Table(name = "work_schedule")
@@ -15,9 +16,9 @@ import java.util.List;
 @NoArgsConstructor
 public class WorkSchedule extends BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id")
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id", updatable = false, nullable = false)
+    private UUID id;
     @Column(name = "start_schedule")
     private LocalDateTime startSchedule;
     @Column(name = "end_schedule")

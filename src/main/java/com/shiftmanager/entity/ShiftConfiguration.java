@@ -5,6 +5,7 @@ import lombok.*;
 
 import java.time.LocalTime;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Table(name = "shift_configuration")
@@ -16,9 +17,9 @@ import java.util.List;
 @NoArgsConstructor
 public class ShiftConfiguration extends BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id")
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id", updatable = false, nullable = false)
+    private UUID id;
     @Column(name = "amount_of_workers")
     private Integer amountOfWorkers;
     @Column(name = "shift_day")

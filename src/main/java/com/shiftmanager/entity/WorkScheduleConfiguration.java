@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Table(name = "work_schedule_configuration")
@@ -15,9 +16,9 @@ import java.util.List;
 @NoArgsConstructor
 public class WorkScheduleConfiguration extends BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id")
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id", updatable = false, nullable = false)
+    private UUID id;
     @Column(name = "amount_of_days")
     private Integer amountOfDays;
 

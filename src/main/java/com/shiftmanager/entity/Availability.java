@@ -3,6 +3,8 @@ package com.shiftmanager.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.UUID;
+
 
 @Entity
 @Table(name = "availability")
@@ -14,9 +16,9 @@ import lombok.*;
 @NoArgsConstructor
 public class Availability extends BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id")
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id", updatable = false, nullable = false)
+    private UUID id;
     @Builder.Default
     @Column(name = "active")
     private boolean active = true;

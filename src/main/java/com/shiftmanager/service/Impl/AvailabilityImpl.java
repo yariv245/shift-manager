@@ -79,7 +79,7 @@ public class AvailabilityImpl implements AvailabilityService {
 
     private AvailabilityResponse mapToAvailabilityResponse(Availability availability) {
         return AvailabilityResponse.builder()
-                .id(availability.getId())
+//                .id(availability.getId())
 //                .day(availability.getDay())
                 // todo: set the start and end time
 //                .start(availability.getTimeSlot().getStartSlot())
