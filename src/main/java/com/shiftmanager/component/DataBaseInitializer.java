@@ -7,6 +7,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.Month;
 import java.util.List;
 import java.util.UUID;
@@ -35,22 +36,30 @@ public class DataBaseInitializer implements CommandLineRunner {
     private List<ShiftConfiguration> initializeShiftConfiguration(WorkScheduleConfiguration workScheduleConfiguration) {
         ShiftConfiguration shiftConfiguration = ShiftConfiguration.builder()
                 .amountOfWorkers(2)
-                .day(0)
+                .day(1)
+                .start(LocalTime.of(7, 0))
+                .end(LocalTime.of(14, 0))
                 .workScheduleConfiguration(workScheduleConfiguration)
                 .build();
         ShiftConfiguration shiftConfiguration2 = ShiftConfiguration.builder()
                 .amountOfWorkers(3)
-                .day(0)
+                .day(1)
+                .start(LocalTime.of(8, 0))
+                .end(LocalTime.of(15, 0))
                 .workScheduleConfiguration(workScheduleConfiguration)
                 .build();
         ShiftConfiguration shiftConfiguration3 = ShiftConfiguration.builder()
                 .amountOfWorkers(1)
-                .day(0)
+                .day(2)
+                .start(LocalTime.of(10, 0))
+                .end(LocalTime.of(17, 0))
                 .workScheduleConfiguration(workScheduleConfiguration)
                 .build();
         ShiftConfiguration shiftConfiguration4 = ShiftConfiguration.builder()
                 .amountOfWorkers(1)
-                .day(0)
+                .day(2)
+                .start(LocalTime.of(13, 0))
+                .end(LocalTime.of(20, 0))
                 .workScheduleConfiguration(workScheduleConfiguration)
                 .build();
 

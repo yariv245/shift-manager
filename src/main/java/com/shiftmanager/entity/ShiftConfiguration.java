@@ -24,10 +24,10 @@ public class ShiftConfiguration extends BaseEntity {
     private Integer amountOfWorkers;
     @Column(name = "shift_day")
     private Integer day;
-    @Column(name = "start_time")
-    private LocalTime startTime;
-    @Column(name = "length")
-    private LocalTime length;
+    @Column(name = "start")
+    private LocalTime start;
+    @Column(name = "end")
+    private LocalTime end;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "work_schedule_configuration_id")
