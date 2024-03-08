@@ -3,6 +3,7 @@ package com.shiftmanager.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,6 +22,8 @@ public class WorkScheduleConfiguration extends BaseEntity {
     private UUID id;
     @Column(name = "amount_of_days")
     private Integer amountOfDays;
+    @Column(name = "start_date")
+    private LocalDate startDay;
 
     @OneToMany(mappedBy = "workScheduleConfiguration",
             targetEntity = ShiftConfiguration.class)

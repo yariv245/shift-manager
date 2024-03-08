@@ -61,6 +61,7 @@ public class DataBaseInitializer implements CommandLineRunner {
         WorkScheduleConfiguration workScheduleConfiguration = WorkScheduleConfiguration.builder()
                 .amountOfDays(7)
                 .department(department)
+                .startDay(LocalDate.of(2024, Month.MARCH, 1))
                 .build();
 
         return workScheduleConfigurationRepository.save(workScheduleConfiguration);
@@ -104,7 +105,7 @@ public class DataBaseInitializer implements CommandLineRunner {
                 .department(department)
                 .build();
 
-        accountRepository.saveAll(List.of(employee,manager));
+        accountRepository.saveAll(List.of(employee, manager));
     }
 
     private List<Role> initializeRole() {
