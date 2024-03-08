@@ -20,7 +20,8 @@ public class DataBaseInitializer implements CommandLineRunner {
     private final DepartmentRepository departmentRepository;
     private final WorkScheduleConfigurationRepository workScheduleConfigurationRepository;
     private final ShiftConfigurationRepository shiftConfigurationRepository;
-    private final UUID ACCOUNT_ID = UUID.fromString("72f93290-7921-4273-b1ab-38572368b24c");
+    private final UUID EMPLOYEE_ACCOUNT_ID = UUID.fromString("72f93290-7921-4273-b1ab-38572368b24c");
+    private final UUID MANAGER_ACCOUNT_ID = UUID.fromString("72f93290-7921-4273-b1ab-38572368b24c");
 
     @Override
     public void run(String... args) throws Exception {
@@ -74,7 +75,7 @@ public class DataBaseInitializer implements CommandLineRunner {
 
     private void initializeAccount(List<Role> roles, Department department) {
         Account employee = Account.builder()
-                .id(ACCOUNT_ID)
+                .id(EMPLOYEE_ACCOUNT_ID)
                 .role(roles.get(0))
 //                .shifts()
 //                .availabilities()
@@ -89,7 +90,7 @@ public class DataBaseInitializer implements CommandLineRunner {
                 .build();
 
         Account manager = Account.builder()
-                .id(ACCOUNT_ID)
+                .id(MANAGER_ACCOUNT_ID)
                 .role(roles.get(0))
 //                .shifts()
 //                .availabilities()
