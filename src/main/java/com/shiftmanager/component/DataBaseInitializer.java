@@ -73,22 +73,37 @@ public class DataBaseInitializer implements CommandLineRunner {
     }
 
     private void initializeAccount(List<Role> roles, Department department) {
-        Account account = Account.builder()
+        Account employee = Account.builder()
                 .id(ACCOUNT_ID)
                 .role(roles.get(0))
 //                .shifts()
 //                .availabilities()
                 .address("Hagititi 19 rishone lezion")
                 .firstName("Yariv")
-                .lastName("Men")
+                .lastName("employee")
                 .email("yariv@hom.co")
                 .dateOfBirth(LocalDate.of(1995, Month.AUGUST, 22))
-                .phoneNumber("524594598")
+                .phoneNumber("547481231")
                 .phonePrefix("972")
                 .department(department)
                 .build();
 
-        accountRepository.save(account);
+        Account manager = Account.builder()
+                .id(ACCOUNT_ID)
+                .role(roles.get(0))
+//                .shifts()
+//                .availabilities()
+                .address("Hatezmoret 5 rishone lezion")
+                .firstName("Amit")
+                .lastName("manager")
+                .email("amit@yah.co")
+                .dateOfBirth(LocalDate.of(1995, Month.OCTOBER, 2))
+                .phoneNumber("547481234")
+                .phonePrefix("972")
+                .department(department)
+                .build();
+
+        accountRepository.saveAll(List.of(employee,manager));
     }
 
     private List<Role> initializeRole() {
