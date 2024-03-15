@@ -30,7 +30,7 @@ Ref: work_schedule.department_id > department.id
 Ref: work_schedule_configuration - department.id
 
 
-![ShiftManager (4)](https://github.com/yariv245/shift-manager/assets/6500992/8ccc9f66-c14e-40a5-aa9d-2a01b0d460df)
+![ShiftManager (5)](https://github.com/yariv245/shift-manager/assets/6500992/f7d2c1b5-1fcf-4a4f-ab5a-8f9ca10cd593)
 
 // Use DBML to define your database structure
 // Docs: https://dbml.dbdiagram.io/docs
