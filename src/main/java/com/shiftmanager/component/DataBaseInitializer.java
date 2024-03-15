@@ -33,6 +33,12 @@ public class DataBaseInitializer implements CommandLineRunner {
         initializeShiftConfiguration(workScheduleConfiguration);
     }
 
+    /**
+     * day 1: 2 workers -> 07:00 - 14:00 + 3 workers -> 08:00 - 15:00
+     * day 2: 1 workers -> 10:00 - 17:00 + 1 workers -> 13:00 - 20:00
+     * @param workScheduleConfiguration work config
+     * @return shift configuration
+     */
     private List<ShiftConfiguration> initializeShiftConfiguration(WorkScheduleConfiguration workScheduleConfiguration) {
         ShiftConfiguration shiftConfiguration = ShiftConfiguration.builder()
                 .amountOfWorkers(2)
@@ -66,11 +72,18 @@ public class DataBaseInitializer implements CommandLineRunner {
         return shiftConfigurationRepository.saveAll(List.of(shiftConfiguration, shiftConfiguration2, shiftConfiguration3, shiftConfiguration4));
     }
 
+    /**
+     *  sunday , 00:00
+     *  7 days
+     * @param department department
+     * @return entity
+     */
     private WorkScheduleConfiguration initializeWorkScheduleConfiguration(Department department) {
         WorkScheduleConfiguration workScheduleConfiguration = WorkScheduleConfiguration.builder()
-                .amountOfDays(7)
                 .department(department)
-                .startDay(LocalDate.of(2024, Month.MARCH, 1))
+                .amountOfDays(7)
+                .dayInWeek(1) // sunday
+                .startTime(LocalTime.of(0,0)) // 00:00
                 .build();
 
         return workScheduleConfigurationRepository.save(workScheduleConfiguration);
